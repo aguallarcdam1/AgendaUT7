@@ -10,6 +10,7 @@ public class Contacto {
 		this.apellidos = apellidos.toUpperCase();
 		this.telefono = telefono;
 		this.email = email.toLowerCase();
+		
 	}
 
 	public String getNombre() {
@@ -46,8 +47,24 @@ public class Contacto {
 
 	@Override
 	public int hashCode() {
-		return email.hashCode();
-
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((apellidos == null) ? 0 : apellidos.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+		result = prime * result + ((telefono == null) ? 0 : telefono.hashCode());
+		return result;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+	}
+	
 
 }
