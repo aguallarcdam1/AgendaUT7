@@ -1,4 +1,4 @@
-public class Contacto {
+public abstract class Contacto implements Comparable<Contacto> {
 	private String nombre;
 	private String apellidos;
 	private String telefono;
@@ -71,5 +71,17 @@ public class Contacto {
 
 	}
 	
+	public int compareTo(Contacto c) {
 
+		return this.getApellidos().compareToIgnoreCase(c.getApellidos());
+		
+	}
+	public abstract String Firma();
+	
+
+	public char getPrimeraLetra() {
+		return apellidos.charAt(0);
+	}
 }
+
+
