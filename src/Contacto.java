@@ -64,6 +64,11 @@ public class Contacto {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
+		Contacto other = (Contacto) obj;
+		return other.getApellidos() == this.getApellidos()
+		                    && other.getNombre() == this.getNombre() 
+		                    && other.getEmail() == this.getEmail();
+
 	}
 	
 
