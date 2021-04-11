@@ -76,7 +76,7 @@ public abstract class Contacto implements Comparable<Contacto> {
 		return this.getApellidos().compareToIgnoreCase(c.getApellidos());
 		
 	}
-	public abstract String Firma();
+	public abstract String getFirmaEmail();
 	
 
 	public char getPrimeraLetra() {
@@ -84,6 +84,8 @@ public abstract class Contacto implements Comparable<Contacto> {
 	}
 
 public abstract String toString();
+
+
 
 	
 }

@@ -1,4 +1,4 @@
-import java.time.format.DateTimeFormatter;
+
 
 public class Profesional extends Contacto {
 	private String empresa;
@@ -8,8 +8,8 @@ public class Profesional extends Contacto {
 	}
 	
 
-	@Override
-	public  String Firma() {
+
+	public  String getFirmaEmail() {
 		int opciones =  (int) (Math.random()*5 + 1);
 		String opcion = "";
 		switch(opciones) {
@@ -40,6 +40,10 @@ public class Profesional extends Contacto {
 					+ ")\n" + "Tfno: " + super.getTelefono() + " | " + "email: " + super.getEmail() 
 					+ "\nEmpresa: " + this.getEmpresa();
 		}
+
+
+
+	
 
 		
 		

@@ -1,6 +1,9 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/*
+ * autor: Parte de Andrés
+ */
 public class Personal extends Contacto{
     private LocalDate fechaNacimiento;
     private Relacion relacion;
@@ -22,7 +25,7 @@ public class Personal extends Contacto{
 	this.fechaNacimiento = LocalDate.parse(fechaNacimiento);
     }
     @Override
-    public String Firma() {
+    public String getFirmaEmail() {
 
 	return "Un abrazo!!";
     }
