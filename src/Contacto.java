@@ -82,6 +82,10 @@ public abstract class Contacto implements Comparable<Contacto> {
 	public char getPrimeraLetra() {
 		return apellidos.charAt(0);
 	}
+
+	@Override
+	public abstract String toString();
+	
 }
 
 
