@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Personal extends Contacto{
     private LocalDate fechaNacimiento;
@@ -31,5 +32,15 @@ public class Personal extends Contacto{
 	return fechaNacimiento.equals(LocalDate.now());
     
     }
+    
+	@Override
+	public String toString() {
+		
+		return super.getApellidos() + ", " + super.getNombre() + " (" + this.getClass().getSimpleName()
+				+ ")\n" + "Tfno: " + super.getTelefono() + " | " + "email: " + super.getEmail() 
+				+ "\nFecha nacimiento: " + this.getFechaNacimiento().format(DateTimeFormatter.ofPattern("dd MMM. yyyy"))
+				+ "\nRelación: " + this.getRelacion();
+	}
 
 }
+
