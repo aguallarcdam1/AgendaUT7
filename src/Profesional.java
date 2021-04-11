@@ -10,16 +10,17 @@ public class Profesional extends Contacto {
 
 	@Override
 	public  String Firma() {
-		int opciones = 4;
+		int opciones =  (int) (Math.random()*5 + 1);
+		String opcion = "";
 		switch(opciones) {
 		
-		case 1: System.out.println("Atentamente");
-		case 2: System.out.println("Saludos");
-		case 3: System.out.println("Saludos cordiales");
-		case 4: System.out.println("Mis mejores deseos");
+		case 1: opcion = "Atentamente";
+		case 2: opcion = "Saludos";
+		case 3: opcion = "Saludos cordiales";
+		case 4: opcion = "Mis mejores deseos";
 		
 		}
-		return null;
+		return opcion;
 	
 	}
 		
