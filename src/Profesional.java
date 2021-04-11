@@ -1,3 +1,4 @@
+import java.time.format.DateTimeFormatter;
 
 public class Profesional extends Contacto {
 	private String empresa;
@@ -33,11 +34,14 @@ public class Profesional extends Contacto {
 	}
 
 	@Override
-	public String toString() {
+	public String toString() {	
+			return super.getApellidos() + ", " + super.getNombre() + " (" + this.getClass().getSimpleName()
+					+ ")\n" + "Tfno: " + super.getTelefono() + " | " + "email: " + super.getEmail() 
+					+ "\nEmpresa: " + this.getEmpresa();
+		}
+
 		
-		return getApellidos() + " , " + getNombre() + "(PROFESIONAL)\n" + "Tfno: " 
-		+ getTelefono() + " | email: " + getEmail() + "\n Empresa: " + getEmpresa();
-	}
+		
 
 
 }
