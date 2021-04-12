@@ -72,8 +72,12 @@ public abstract class Contacto implements Comparable<Contacto> {
 	}
 	
 	public int compareTo(Contacto c) {
-
-		return this.getApellidos().compareToIgnoreCase(c.getApellidos());
+		if (this.getApellidos().compareToIgnoreCase(c.getApellidos() == 0) {
+			return this.getNombre().compareToIgnoreCase(c.getNombre());
+		else {
+			return this.getApellidos().compareToIgnoreCase(c.getApellidos());
+		}
+	
 		
 	}
 	public abstract String getFirmaEmail();
