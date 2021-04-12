@@ -83,11 +83,13 @@ public abstract class Contacto implements Comparable<Contacto> {
 		return apellidos.charAt(0);
 	}
 
-public abstract String toString();
+	public String toString() {
 
-
+		return getApellidos() + " , " + getNombre() +  " (" + this.getClass().getSimpleName() + ")\n"+ "Tfno: " 
+		+ getTelefono() + " | email: " + getEmail();
+	}}
 
 	
-}
+
 
 
