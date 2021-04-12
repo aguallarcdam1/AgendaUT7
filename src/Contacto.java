@@ -1,16 +1,18 @@
+/*
+ *  autor: Parte de Javier
+ */
 public abstract class Contacto implements Comparable<Contacto> {
 	private String nombre;
 	private String apellidos;
 	private String telefono;
 	private String email;
 
-	public Contacto(String nombre, String apellidos, String telefono,
-			String email) {
+	public Contacto(String nombre, String apellidos, String telefono, String email) {
 		this.nombre = nombre.toUpperCase();
 		this.apellidos = apellidos.toUpperCase();
 		this.telefono = telefono;
 		this.email = email.toLowerCase();
-		
+
 	}
 
 	public String getNombre() {
@@ -65,35 +67,31 @@ public abstract class Contacto implements Comparable<Contacto> {
 		if (getClass() != obj.getClass())
 			return false;
 		Contacto other = (Contacto) obj;
-		return other.getApellidos() == this.getApellidos()
-		                    && other.getNombre() == this.getNombre() 
-		                    && other.getEmail() == this.getEmail();
+		return other.getApellidos() == this.getApellidos() && other.getNombre() == this.getNombre()
+				&& other.getEmail() == this.getEmail();
 
 	}
-	
+
+	@Override
 	public int compareTo(Contacto c) {
-		if (this.getApellidos().compareToIgnoreCase(c.getApellidos() == 0) {
+		if (this.getApellidos().compareToIgnoreCase(c.getApellidos()) == 0) {
 			return this.getNombre().compareToIgnoreCase(c.getNombre());
-		else {
+		} else {
 			return this.getApellidos().compareToIgnoreCase(c.getApellidos());
 		}
-	
-		
+
 	}
+
 	public abstract String getFirmaEmail();
-	
 
 	public char getPrimeraLetra() {
 		return apellidos.charAt(0);
 	}
 
+	@Override
 	public String toString() {
 
-		return getApellidos() + " , " + getNombre() +  " (" + this.getClass().getSimpleName() + ")\n"+ "Tfno: " 
-		+ getTelefono() + " | email: " + getEmail();
-	}}
-
-	
-
-
-
+		return getApellidos() + " , " + getNombre() + " (" + this.getClass().getSimpleName() + ")\n" + "Tfno: "
+				+ getTelefono() + " | email: " + getEmail();
+	}
+}

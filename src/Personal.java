@@ -51,8 +51,7 @@ public class Personal extends Contacto {
 	@Override
 	public String toString() {
 
-		return super.getApellidos() + ", " + super.getNombre() + " (" + this.getClass().getSimpleName() + ")\n"
-				+ "Tfno: " + super.getTelefono() + " | " + "email: " + super.getEmail() + "\nFecha nacimiento: "
+		return super.toString() + "\nFecha nacimiento: "
 				+ this.getFechaNacimiento().format(DateTimeFormatter.ofPattern("dd MMM. yyyy")) + "\nRelación: "
 				+ this.getRelacion();
 	}
