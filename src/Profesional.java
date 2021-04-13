@@ -7,6 +7,7 @@ public class Profesional extends Contacto {
 
 	public Profesional(String nombre, String apellidos, String telefono, String email, String empresa) {
 		super(nombre, apellidos, telefono, email);
+		this.empresa = empresa;
 	}
 
 	@Override
