@@ -1,7 +1,11 @@
 package ut7.agenda.modelo;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -17,7 +21,7 @@ public class AgendaContactos {
 	}
 
 	/*
-	 * Parte de Andrés Se añade una entrada en el mapa agenda, comprobando si la
+	 * Parte de Andrés. Se añade una entrada en el mapa 'agenda', comprobando si la
 	 * clave ya está dentro del mapa.
 	 */
 	public void añadirContacto(Contacto contacto) {
@@ -38,10 +42,17 @@ public class AgendaContactos {
 	}
 
 	/*
-	 * Parte de Andrés
+	 * Parte de Andrés. Devuelve el total de contactos que hay almacenados en la
+	 * agenda.
+	 * 
 	 */
-	public void totalContactos() {
-
+	public int totalContactos() {
+		int totalContactos = 0;
+		Set<Character> keys = agenda.keySet();
+		for (Character character : keys) {
+			totalContactos += totalContactos + agenda.get(character).size();
+		}
+		return totalContactos;
 	}
 
 	/*
@@ -54,11 +65,22 @@ public class AgendaContactos {
 	}
 
 	/*
-	 * Parte de Andrés
+	 * Parte de Andrés. Se pasa un texto como parámetro y se devuelve una lista con
+	 * los contactos que contengan ese texto en su nombre o apellidos.
 	 */
-	public List<Contacto> buscarContactos(String texto) {
+	public ArrayList<Contacto> buscarContactos(String texto) {
+		ArrayList<Contacto> contactosBuscados = new ArrayList<>();
 
-		return null;
+		Set<Map.Entry<Character, Set<Contacto>>> entradas = agenda.entrySet();
+		for (Entry<Character, Set<Contacto>> entrada : entradas) {
+			Set<Contacto> contactos = entrada.getValue();
+			for (Contacto contacto : contactos) {
+				if (contacto.getApellidos().contains(texto) || contacto.getNombre().contains(texto)) {
+					contactosBuscados.add(contacto);
+				}
+			}
+		}
+		return contactosBuscados;
 
 	}
 
@@ -71,11 +93,23 @@ public class AgendaContactos {
 	}
 
 	/*
-	 * Parte de Andrés
+	 * Parte de Andrés. Devuelve una lista con los contactos personales que cumplen
+	 * años.
 	 */
-	public List<Personal> felicitar() {
+	public ArrayList<Personal> felicitar() {
+		ArrayList<Personal> contactosFelicitados = new ArrayList<>();
 
-		return null;
+		Set<Map.Entry<Character, Set<Contacto>>> entradas = agenda.entrySet();
+		for (Entry<Character, Set<Contacto>> entrada : entradas) {
+			Set<Contacto> contactos = entrada.getValue();
+			for (Contacto contacto : contactos) {
+				if (contacto instanceof Personal) {
+					contactosFelicitados.add((Personal) contacto);
+				}
+			}
+		}
+
+		return contactosFelicitados;
 	}
 
 	/*
@@ -86,11 +120,28 @@ public class AgendaContactos {
 	}
 
 	/*
-	 * Parte de Andrés
+	 * Parte de Andrés. Devuelve una lista de contactos personales ordenados por
+	 * fecha de nacimiento.
 	 */
 	public List<Personal> personalesOrdenadosPorFechaNacimiento(char letra) {
+		ArrayList<Personal> personalesOrdenadosFecha = new ArrayList<>();
 
-		return null;
+		Set<Contacto> contactos = agenda.get(letra);
+		for (Contacto contacto : contactos) {
+			if (contacto instanceof Personal) {
+				personalesOrdenadosFecha.add((Personal) contacto);
+			}
+		}
+		Collections.sort(personalesOrdenadosFecha, new Comparator<Personal>() {
+
+			@Override
+			public int compare(Personal c1, Personal c2) {
+
+				return c1.getFechaNacimiento().compareTo(c2.getFechaNacimiento());
+
+			}
+		});
+		return personalesOrdenadosFecha;
 
 	}
 
