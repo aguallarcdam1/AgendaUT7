@@ -37,8 +37,10 @@ public class AgendaContactos {
 	/*
 	 * Parte de Javier
 	 */
-	public void contactosEnLetra() {
-
+	public void contactosEnLetra(char letra) {
+		if(agenda.containsValue(letra)) {
+			return;
+		}
 	}
 
 	/*
@@ -88,8 +90,24 @@ public class AgendaContactos {
 	 * Parte de Javier
 	 */
 	public List<Personal> personalesEnLetra(char letra) {
+	
+			
+		ArrayList<Personal> personalLetra = new ArrayList<>();
 
-		return null;
+		Set<Map.Entry<Character, Set<Contacto>>> entradas = agenda.entrySet();
+		for (Entry<Character, Set<Contacto>> entrada : entradas) {
+			Set<Contacto> contactos = entrada.getValue();
+			for (Contacto contacto : contactos) {
+				if (contacto instanceof Personal && contacto.getPrimeraLetra() == letra) {
+					personalLetra.add((Personal) contacto);
+				}
+				else if (agenda.containsKey(letra)== false) {
+					return null;
+					
+				}
+			}
+	}
+		return personalLetra;
 	}
 
 	/*
