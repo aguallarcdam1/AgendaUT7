@@ -1,11 +1,13 @@
+package ut7.agenda.modelo;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-/*
- * Parte conjunta (Javier y Andrés).
+/**
+ * @author Andrés & Javier
  */
 public class AgendaContactos {
 	private Map<Character, Set<Contacto>> agenda;
@@ -15,7 +17,8 @@ public class AgendaContactos {
 	}
 
 	/*
-	 * Parte de Andrés
+	 * Parte de Andrés Se añade una entrada en el mapa agenda, comprobando si la
+	 * clave ya está dentro del mapa.
 	 */
 	public void añadirContacto(Contacto contacto) {
 		if (!agenda.containsKey(contacto.getPrimeraLetra())) {

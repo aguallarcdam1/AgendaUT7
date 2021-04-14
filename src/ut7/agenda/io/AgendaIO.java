@@ -1,6 +1,14 @@
+package ut7.agenda.io;
+import ut7.agenda.modelo.AgendaContactos;
+import ut7.agenda.modelo.Contacto;
+import ut7.agenda.modelo.Personal;
+import ut7.agenda.modelo.Profesional;
+import ut7.agenda.modelo.Relacion;
 
 /**
- * Utilidades para cargar la agenda Autor: Parte de Andrés
+ * Utilidades para cargar la agenda
+ * 
+ * @author Andrés & Javier
  */
 public class AgendaIO {
 

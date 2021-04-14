@@ -1,5 +1,7 @@
-/*
- *  autor: Parte de Javier
+package ut7.agenda.modelo;
+
+/**
+ * @author Andrés & Javier
  */
 public abstract class Contacto implements Comparable<Contacto> {
 	private String nombre;
@@ -67,8 +69,8 @@ public abstract class Contacto implements Comparable<Contacto> {
 		if (getClass() != obj.getClass())
 			return false;
 		Contacto other = (Contacto) obj;
-		return other.getApellidos() == this.getApellidos() && other.getNombre() == this.getNombre()
-				&& other.getEmail() == this.getEmail();
+		return other.getApellidos().equals(this.getApellidos()) && other.getNombre().equals(this.getNombre())
+				&& other.getEmail().equals(this.getEmail());
 
 	}
 

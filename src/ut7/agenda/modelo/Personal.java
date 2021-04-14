@@ -1,8 +1,10 @@
+package ut7.agenda.modelo;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-/*
- * autor: Parte de Andrés
+/**
+ * @author Andrés & Javier
  */
 public class Personal extends Contacto {
 	private LocalDate fechaNacimiento;
@@ -28,7 +30,8 @@ public class Personal extends Contacto {
 	}
 
 	public void setFechaNacimiento(String fechaNacimiento) {
-		this.fechaNacimiento = LocalDate.parse(fechaNacimiento);
+		DateTimeFormatter formateadorFecha = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		this.fechaNacimiento = LocalDate.parse(fechaNacimiento, formateadorFecha);
 	}
 
 	@Override
