@@ -37,10 +37,20 @@ public class AgendaContactos {
 	/*
 	 * Parte de Javier
 	 */
-	public void contactosEnLetra(char letra) {
-		if(agenda.containsValue(letra)) {
-			return;
-		}
+	public Set<Entry<Character, Set<Contacto>>> contactosEnLetra(char letra) {
+		Set<Map.Entry<Character, Set<Contacto>>> entradas = agenda.entrySet();
+		for (Entry<Character, Set<Contacto>> entrada : entradas) {
+			Set<Contacto> contactos = entrada.getValue();
+			for (Contacto contacto : contactos) {
+				if (contacto.getPrimeraLetra() == letra) {
+					entradas.add(entrada) ;
+					
+				}
+				
+			}
+	}
+		return entradas;
+		
 	}
 
 	/*
@@ -133,7 +143,8 @@ public class AgendaContactos {
 	/*
 	 * Parte de Javier
 	 */
-	public void personalesPorRelacion() {
+	public Map<Relacion, List<String>> personalesPorRelacion() {
+		return null;
 
 	}
 
