@@ -14,7 +14,7 @@ public class Profesional extends Contacto {
 
 	@Override
 	public String getFirmaEmail() {
-		int opciones = (int) (Math.random() * 5 + 1);
+		int opciones = (int) (Math.random() * 4 + 1);
 		String opcion = "";
 		switch (opciones) {
 
@@ -46,7 +46,7 @@ public class Profesional extends Contacto {
 
 	@Override
 	public String toString() {
-		return super.toString() + "\nEmpresa: " + this.getEmpresa();
+		return super.toString() + "\nEmpresa: " + this.getEmpresa() + "\n";
 	}
 
 }

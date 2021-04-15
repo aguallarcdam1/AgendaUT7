@@ -56,7 +56,7 @@ public class Personal extends Contacto {
 
 		return super.toString() + "\nFecha nacimiento: "
 				+ this.getFechaNacimiento().format(DateTimeFormatter.ofPattern("dd MMM. yyyy")) + "\nRelación: "
-				+ this.getRelacion();
+				+ this.getRelacion() + "\n";
 	}
 
 }
