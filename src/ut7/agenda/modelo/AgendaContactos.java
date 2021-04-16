@@ -63,7 +63,7 @@ public class AgendaContactos {
 	int totalContactos = 0;
 	Set<Character> keys = agenda.keySet();
 	for (Character character : keys) {
-	    totalContactos += totalContactos + agenda.get(character).size();
+	    totalContactos += agenda.get(character).size();
 	}
 	return totalContactos;
     }
