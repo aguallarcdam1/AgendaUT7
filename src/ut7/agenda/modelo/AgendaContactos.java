@@ -165,7 +165,7 @@ public class AgendaContactos {
 	    Map.Entry<Character, Set<Contacto>> mp = it.next();
 	    for (Contacto con : mp.getValue()) {
 		if (con instanceof Personal) {
-		    String str = con.getNombre() + con.getApellidos();
+		    String str = con.getApellidos() + " " + con.getNombre();
 		    Relacion rel = ((Personal) con).getRelacion();
 
 		    if (perso.containsKey(rel)) {
