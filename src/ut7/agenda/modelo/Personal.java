@@ -82,8 +82,7 @@ public class Personal extends Contacto {
 
     /**
      * 
-     * Método toString de la clase PersonaL. Se le llama al toString de la clase
-     * padre Contacto
+     * Método toString de la clase PersonaL. Se le llama al toString de la clase padre Contacto
      */
     @Override
     public String toString() {

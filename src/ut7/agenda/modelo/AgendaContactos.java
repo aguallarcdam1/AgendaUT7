@@ -103,7 +103,7 @@ public class AgendaContactos {
      * tengan la letra pasada como parametro
      */
     public List<Personal> personalesEnLetra(char letra) {
-
+	letra = Character.toUpperCase(letra);
 	ArrayList<Personal> personalLetra = new ArrayList<>();
 
 	Set<Map.Entry<Character, Set<Contacto>>> entradas = agenda.entrySet();
@@ -182,7 +182,7 @@ public class AgendaContactos {
      */
     public List<Personal> personalesOrdenadosPorFechaNacimiento(char letra) {
 	ArrayList<Personal> personalesOrdenadosFecha = new ArrayList<>();
-
+	letra = Character.toUpperCase(letra);
 	Set<Contacto> contactos = agenda.get(letra);
 	for (Contacto contacto : contactos) {
 	    if (contacto instanceof Personal) {
