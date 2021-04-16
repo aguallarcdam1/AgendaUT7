@@ -63,29 +63,29 @@ public class AgendaContactos {
 	int totalContactos = 0;
 	Set<Character> keys = agenda.keySet();
 	for (Character character : keys) {
-	    totalContactos += totalContactos + agenda.get(character).size();
+	    totalContactos += agenda.get(character).size();
 	}
 	return totalContactos;
     }
 
     /*
-     * Parte de Javier Representacion textual
+     * Parte de Javier Representacion textual de la agenda
      */
     @Override
     public String toString() {
-    	Set<Map.Entry<Character, Set<Contacto>>> x = agenda.entrySet();
-    	Iterator<Map.Entry<Character, Set<Contacto>>> it = x.iterator();
-    	StringBuilder sb = new StringBuilder();
-    	while (it.hasNext()) {
-    		Map.Entry<Character,Set<Contacto>> mapa = it.next();
-    		for(Contacto contacto : mapa.getValue()) {
-    			sb.append("\n" + contacto.getApellidos() + " " + "\n" + contacto.getNombre() + " "
-			+ "\n" + contacto.getTelefono() + " " + "\n" + contacto.getEmail() + " ");
-    			
-    			
-    		}
-    	}
-	return sb.toString();
+	String str = getClass().getSimpleName() + "\n";
+
+	Set<Map.Entry<Character, Set<Contacto>>> entradas = agenda.entrySet();
+
+	for (Entry<Character, Set<Contacto>> entry : entradas) {
+	    str += "\n" + entry.getKey() + " (" + entry.getValue().size() + " contacto/s)\n---------------------\n";
+	    Set<Contacto> valores = entry.getValue();
+	    for (Contacto valor : valores) {
+		str += valor.toString() + "\n";
+	    }
+	}
+	str += "---------------------\n(" + totalContactos() + " Contacto/s)\n";
+	return str;
     }
 
     /*
