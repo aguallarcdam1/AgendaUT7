@@ -38,9 +38,19 @@ public class AgendaContactos {
     /*
      * Parte de Javier.Devuelve todos los contactos de la letra dada como parametro
      */
-    public Set<Contacto> contactosEnLetra(char letra) {
-	letra = Character.toUpperCase(letra);
-	return agenda.get(letra);
+    public Set<Entry<Character, Set<Contacto>>> contactosEnLetra(char letra) {
+	Set<Map.Entry<Character, Set<Contacto>>> entradas = agenda.entrySet();
+	for (Entry<Character, Set<Contacto>> entrada : entradas) {
+	    Set<Contacto> contactos = entrada.getValue();
+	    for (Contacto contacto : contactos) {
+		if (contacto.getPrimeraLetra() == letra) {
+		    entradas.add(entrada);
+
+		}
+
+	    }
+	}
+	return entradas;
 
     }
 
@@ -53,7 +63,7 @@ public class AgendaContactos {
 	int totalContactos = 0;
 	Set<Character> keys = agenda.keySet();
 	for (Character character : keys) {
-	    totalContactos += agenda.get(character).size();
+	    totalContactos += totalContactos + agenda.get(character).size();
 	}
 	return totalContactos;
     }
@@ -63,8 +73,19 @@ public class AgendaContactos {
      */
     @Override
     public String toString() {
-
-	return null;
+    	Set<Map.Entry<Character, Set<Contacto>>> x = agenda.entrySet();
+    	Iterator<Map.Entry<Character, Set<Contacto>>> it = x.iterator();
+    	StringBuilder sb = new StringBuilder();
+    	while (it.hasNext()) {
+    		Map.Entry<Character,Set<Contacto>> mapa = it.next();
+    		for(Contacto contacto : mapa.getValue()) {
+    			sb.append("\n" + contacto.getApellidos() + " " + "\n" + contacto.getNombre() + " "
+			+ "\n" + contacto.getTelefono() + " " + "\n" + contacto.getEmail() + " ");
+    			
+    			
+    		}
+    	}
+	return sb.toString();
     }
 
     /*
@@ -144,7 +165,7 @@ public class AgendaContactos {
 	    Map.Entry<Character, Set<Contacto>> mp = it.next();
 	    for (Contacto con : mp.getValue()) {
 		if (con instanceof Personal) {
-		    String str = con.getApellidos() + " " + con.getNombre();
+		    String str = con.getNombre() + con.getApellidos();
 		    Relacion rel = ((Personal) con).getRelacion();
 
 		    if (perso.containsKey(rel)) {
