@@ -38,19 +38,9 @@ public class AgendaContactos {
     /*
      * Parte de Javier.Devuelve todos los contactos de la letra dada como parametro
      */
-    public Set<Entry<Character, Set<Contacto>>> contactosEnLetra(char letra) {
-	Set<Map.Entry<Character, Set<Contacto>>> entradas = agenda.entrySet();
-	for (Entry<Character, Set<Contacto>> entrada : entradas) {
-	    Set<Contacto> contactos = entrada.getValue();
-	    for (Contacto contacto : contactos) {
-		if (contacto.getPrimeraLetra() == letra) {
-		    entradas.add(entrada);
-
-		}
-
-	    }
-	}
-	return entradas;
+    public Set<Contacto> contactosEnLetra(char letra) {
+	letra = Character.toUpperCase(letra);
+	return agenda.get(letra);
 
     }
 
