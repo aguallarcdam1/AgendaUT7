@@ -132,7 +132,7 @@ public class AgendaContactos {
 	for (Entry<Character, Set<Contacto>> entrada : entradas) {
 	    Set<Contacto> contactos = entrada.getValue();
 	    for (Contacto contacto : contactos) {
-		if (contacto instanceof Personal) {
+		if (contacto instanceof Personal && ((Personal) contacto).esCumpleaños()) {
 		    contactosFelicitados.add((Personal) contacto);
 		}
 	    }
