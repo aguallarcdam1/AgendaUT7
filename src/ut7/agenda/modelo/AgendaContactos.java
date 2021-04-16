@@ -3,6 +3,7 @@ package ut7.agenda.modelo;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -144,7 +145,33 @@ public class AgendaContactos {
 	 * Parte de Javier
 	 */
 	public Map<Relacion, List<String>> personalesPorRelacion() {
-		return null;
+		Map<Relacion, List<String>> perso = new TreeMap<>();
+		Iterator<Map.Entry<Character, Set<Contacto>>> it = agenda.entrySet().iterator();
+		while(it.hasNext()) {
+			Map.Entry<Character, Set<Contacto>> mp = it.next();
+			for(Contacto con : mp.getValue()) {
+				if(con instanceof Personal) {
+					String str = con.getNombre() + con.getApellidos();
+					Relacion rel = ((Personal)con).getRelacion();
+					
+						if(perso.containsKey(rel)) {
+							perso.get(rel).add(str);
+						}
+						else {
+							
+							List<String> personales = new ArrayList<>();
+							personales.add(str);
+							perso.put(rel, personales);
+							
+						}
+				}
+				
+			}
+			
+			
+		}
+		
+		return perso;
 
 	}
 
