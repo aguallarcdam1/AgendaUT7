@@ -36,7 +36,7 @@ public class AgendaContactos {
 	}
 
 	/*
-	 * Parte de Javier
+	 * Parte de Javier.Devuelve todos los contactos de la letra dada como parametro
 	 */
 	public Set<Entry<Character, Set<Contacto>>> contactosEnLetra(char letra) {
 		Set<Map.Entry<Character, Set<Contacto>>> entradas = agenda.entrySet();
@@ -69,7 +69,7 @@ public class AgendaContactos {
 	}
 
 	/*
-	 * Parte de Javier
+	 * Parte de Javier Representacion textual
 	 */
 	@Override
 	public String toString() {
@@ -98,7 +98,7 @@ public class AgendaContactos {
 	}
 
 	/*
-	 * Parte de Javier
+	 * Parte de Javier. Devuelve todos los contocatos que sean personales y que tengan la letra pasada como parametro
 	 */
 	public List<Personal> personalesEnLetra(char letra) {
 	
@@ -142,7 +142,11 @@ public class AgendaContactos {
 	}
 
 	/*
-	 * Parte de Javier
+	 * Parte de Javier Devuelve un nuevo map en el que aparecen solo contactos
+personales pero organizados de forma que la clave en el nuevo
+map es la relación (un enumerado) y el valor asociado una
+colección List de cadenas con los apellidos y nombre de todos los
+contactos personales que hay en la agenda
 	 */
 	public Map<Relacion, List<String>> personalesPorRelacion() {
 		Map<Relacion, List<String>> perso = new TreeMap<>();
