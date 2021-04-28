@@ -1,4 +1,4 @@
-package ut7.agenda.modelo;
+package agenda.modelo;
 
 /**
  * @author Andrés & Javier

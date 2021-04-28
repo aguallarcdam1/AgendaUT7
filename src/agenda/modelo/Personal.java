@@ -1,4 +1,4 @@
-package ut7.agenda.modelo;
+package agenda.modelo;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
