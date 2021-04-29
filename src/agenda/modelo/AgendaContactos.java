@@ -38,19 +38,11 @@ public class AgendaContactos {
     /*
      * Parte de Javier.Devuelve todos los contactos de la letra dada como parametro
      */
-    public Set<Entry<Character, Set<Contacto>>> contactosEnLetra(char letra) {
-	Set<Map.Entry<Character, Set<Contacto>>> entradas = agenda.entrySet();
-	for (Entry<Character, Set<Contacto>> entrada : entradas) {
-	    Set<Contacto> contactos = entrada.getValue();
-	    for (Contacto contacto : contactos) {
-		if (contacto.getPrimeraLetra() == letra) {
-		    entradas.add(entrada);
-
+    public  Set<Contacto> contactosEnLetra(char letra) {
+    	if (agenda.containsKey(Character.toUpperCase(letra))) {
+			return agenda.get(letra);
 		}
-
-	    }
-	}
-	return entradas;
+	return null; 
 
     }
 
@@ -114,29 +106,24 @@ public class AgendaContactos {
      * tengan la letra pasada como parametro
      */
     public List<Personal> personalesEnLetra(char letra) {
-	letra = Character.toUpperCase(letra);
-	ArrayList<Personal> personalLetra = new ArrayList<>();
-
-	Set<Map.Entry<Character, Set<Contacto>>> entradas = agenda.entrySet();
-	for (Entry<Character, Set<Contacto>> entrada : entradas) {
-	    Set<Contacto> contactos = entrada.getValue();
-	    for (Contacto contacto : contactos) {
-		if (contacto instanceof Personal && contacto.getPrimeraLetra() == letra) {
-		    personalLetra.add((Personal) contacto);
-		} else if (agenda.containsKey(letra) == false) {
-		    return null;
-
-		}
-	    }
-	}
-	return personalLetra;
+    	letra = Character.toUpperCase(letra);
+    	if (!agenda.containsKey(letra)) {
+    		return null;
+    	}
+    	List<Personal> personales = new ArrayList<>();
+    	for (Contacto contacto : agenda.get(letra)) {
+    		if (contacto instanceof Personal) {
+    			personales.add((Personal) contacto);
+    		}
+    	}
+	return personales;
     }
 
     /*
      * Parte de Andrés. Devuelve una lista con los contactos personales que cumplen
      * años.
      */
-    public ArrayList<Personal> felicitar() {
+    public List<Personal> felicitar() {
 	ArrayList<Personal> contactosFelicitados = new ArrayList<>();
 
 	Set<Map.Entry<Character, Set<Contacto>>> entradas = agenda.entrySet();
@@ -192,14 +179,13 @@ public class AgendaContactos {
      * fecha de nacimiento.
      */
     public List<Personal> personalesOrdenadosPorFechaNacimiento(char letra) {
-	ArrayList<Personal> personalesOrdenadosFecha = new ArrayList<>();
-	letra = Character.toUpperCase(letra);
-	Set<Contacto> contactos = agenda.get(letra);
-	for (Contacto contacto : contactos) {
-	    if (contacto instanceof Personal) {
-		personalesOrdenadosFecha.add((Personal) contacto);
-	    }
-	}
+    	letra = Character.toUpperCase(letra);
+    	if (!agenda.containsKey(letra)) {
+    		return null;
+    	}
+    	List<Personal> personalesOrdenadosFecha = personalesEnLetra(letra);
+	
+	
 	Collections.sort(personalesOrdenadosFecha, new Comparator<Personal>() {
 
 	    @Override

@@ -17,7 +17,12 @@ import agenda.modelo.Relacion;
  * @author Andrés & Javier
  */
 public class AgendaIO {
-
+	/**
+	 * Se extrae los datos del fichero que se proporciona y se añaden los contactos a la agenda.
+	 * @param agenda
+	 * @param nombre
+	 * @return número de errores cuando se lee el fichero
+	 */
 	public static int importar(AgendaContactos agenda, String nombre) {
 		File fichero = new File(nombre);
 		int lineas_erroneas = 0;
@@ -48,7 +53,15 @@ public class AgendaIO {
 		}
 		return lineas_erroneas;
 	}
-
+	
+/**
+ * Se le pasa una línea la cual se le extrae los datos para crear un Contacto
+ * @param linea
+ * @return un Contacto
+ * @throws DateTimeParseException
+ * @throws IllegalArgumentException
+ * @throws NumberFormatException
+ */
 	private static Contacto parsearLinea(String linea)
 			throws DateTimeParseException, IllegalArgumentException, NumberFormatException {
 		String[] datos = linea.split(",");
