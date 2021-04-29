@@ -21,10 +21,11 @@ public class AgendaContactos {
 	this.agenda = new TreeMap<>();
     }
 
-    /*
-     * Parte de Andrés. Se añade una entrada en el mapa 'agenda', comprobando si la
-     * clave ya está dentro del mapa.
-     */
+   /**
+    * Parte de Andrés. Se añade una entrada en el mapa 'agenda', comprobando si la
+    * clave ya está dentro del mapa.
+    * @param contacto
+    */
     public void añadirContacto(Contacto contacto) {
 	if (!agenda.containsKey(contacto.getPrimeraLetra())) {
 	    TreeSet<Contacto> value = new TreeSet<>();
@@ -35,9 +36,11 @@ public class AgendaContactos {
 	}
     }
 
-    /*
-     * Parte de Javier.Devuelve todos los contactos de la letra dada como parametro
-     */
+   /**
+    * Parte de Javier.Devuelve todos los contactos de la letra dada como parametro
+    * @param letra
+    * @return Set<Contacto>
+    */
     public  Set<Contacto> contactosEnLetra(char letra) {
     	if (agenda.containsKey(Character.toUpperCase(letra))) {
 			return agenda.get(letra);
@@ -46,11 +49,11 @@ public class AgendaContactos {
 
     }
 
-    /*
-     * Parte de Andrés. Devuelve el total de contactos que hay almacenados en la
-     * agenda.
-     * 
-     */
+   /**
+    * Parte de Andrés. Devuelve el total de contactos que hay almacenados en la
+    * agenda.
+    * @return int
+    */
     public int totalContactos() {
 	int totalContactos = 0;
 	Set<Character> keys = agenda.keySet();
@@ -60,7 +63,7 @@ public class AgendaContactos {
 	return totalContactos;
     }
 
-    /*
+    /**
      * Parte de Javier Representacion textual de la agenda
      */
     @Override
@@ -80,11 +83,13 @@ public class AgendaContactos {
 	return str;
     }
 
-    /*
-     * Parte de Andrés. Se pasa un texto como parámetro y se devuelve una lista con
-     * los contactos que contengan ese texto en su nombre o apellidos.
-     */
-    public ArrayList<Contacto> buscarContactos(String texto) {
+   /**
+    * Parte de Andrés. Se pasa un texto como parámetro y se devuelve una lista con
+    * los contactos que contengan ese texto en su nombre o apellidos.
+    * @param texto
+    * @return List<Contacto>
+    */
+    public List<Contacto> buscarContactos(String texto) {
 	ArrayList<Contacto> contactosBuscados = new ArrayList<>();
 
 	Set<Map.Entry<Character, Set<Contacto>>> entradas = agenda.entrySet();
@@ -101,10 +106,12 @@ public class AgendaContactos {
 
     }
 
-    /*
-     * Parte de Javier. Devuelve todos los contocatos que sean personales y que
+   /**
+    * Parte de Javier. Devuelve todos los contocatos que sean personales y que
      * tengan la letra pasada como parametro
-     */
+    * @param letra
+    * @return List<Personal>
+    */
     public List<Personal> personalesEnLetra(char letra) {
     	letra = Character.toUpperCase(letra);
     	if (!agenda.containsKey(letra)) {
@@ -119,9 +126,10 @@ public class AgendaContactos {
 	return personales;
     }
 
-    /*
+    /**
      * Parte de Andrés. Devuelve una lista con los contactos personales que cumplen
      * años.
+     * @return List<Personal>
      */
     public List<Personal> felicitar() {
 	ArrayList<Personal> contactosFelicitados = new ArrayList<>();
@@ -139,12 +147,13 @@ public class AgendaContactos {
 	return contactosFelicitados;
     }
 
-    /*
-     * Parte de Javier Devuelve un nuevo map en el que aparecen solo contactos
+  /**
+   * Parte de Javier Devuelve un nuevo map en el que aparecen solo contactos
      * personales pero organizados de forma que la clave en el nuevo map es la
      * relación (un enumerado) y el valor asociado una colección List de cadenas con
      * los apellidos y nombre de todos los contactos personales que hay en la agenda
-     */
+   * @return Map<Relacion, List<String>>
+   */
     public Map<Relacion, List<String>> personalesPorRelacion() {
 	Map<Relacion, List<String>> perso = new TreeMap<>();
 	Iterator<Map.Entry<Character, Set<Contacto>>> it = agenda.entrySet().iterator();
@@ -174,9 +183,11 @@ public class AgendaContactos {
 
     }
 
-    /*
+    /**
      * Parte de Andrés. Devuelve una lista de contactos personales ordenados por
      * fecha de nacimiento.
+     * @param letra
+     * @return List<Personal>
      */
     public List<Personal> personalesOrdenadosPorFechaNacimiento(char letra) {
     	letra = Character.toUpperCase(letra);
