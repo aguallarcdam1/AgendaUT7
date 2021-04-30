@@ -13,7 +13,9 @@ public class Profesional extends Contacto {
     }
 
     @Override
-    /*Devuelve una de las firmas aleatoriamente   */
+    /**
+     * Devuelve una de las firmas aleatoriamente
+     */
     public String getFirmaEmail() {
 	int opciones = (int) (Math.random() * 4 + 1);
 	String opcion = "";
@@ -45,14 +47,21 @@ public class Profesional extends Contacto {
 	this.empresa = empresa;
     }
 
+    /**
+     * Representacion textual
+     */
     @Override
-    public String toString() /* Representacion textual */
-    {
+    public String toString() {
 	return super.toString() + "\nEmpresa: " + this.getEmpresa() + "\n";
     }
 
-    private String capitalizarEmpresa(String empresa)/* Capitaliza las primeras letras del nombre de la empresa*/
-    {
+    /**
+     * Capitaliza las primeras letras del nombre de la empresa
+     * 
+     * @param empresa
+     * @return El nombre capitalizado
+     */
+    private String capitalizarEmpresa(String empresa) {
 	String empresaCapitalizada = "";
 	String[] datos = empresa.trim().split("\\s+");
 	for (String string : datos) {

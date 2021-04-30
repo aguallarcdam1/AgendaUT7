@@ -65,9 +65,10 @@ public class Personal extends Contacto {
     }
 
     /**
-     * 
      * Método que devuelve true si la fecha del día de ejecucón del método coincide
-     * con la fecha de la variable fechaNacimiento
+     * con la fecha de la variable fechaNacimiento.
+     * 
+     * @return true si hoy es su cumpleaños, false si no lo es.
      */
     public boolean esCumpleaños() {
 	LocalDate today = LocalDate.now();
@@ -81,7 +82,6 @@ public class Personal extends Contacto {
     }
 
     /**
-     * 
      * Método toString de la clase PersonaL. Se le llama al toString de la clase
      * padre Contacto.
      */
