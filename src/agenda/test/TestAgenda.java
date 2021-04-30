@@ -1,5 +1,6 @@
 package agenda.test;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
@@ -36,6 +37,8 @@ public class TestAgenda {
 
 	personalesPorRelacion(agenda);
 	separador();
+	
+	exportarPersonales(agenda);
 
     }
 
@@ -82,5 +85,14 @@ public class TestAgenda {
 	System.out.println("------------------------------------------------------------");
 
     }
+    private static void exportarPersonales(AgendaContactos agenda) {
+		
+			try {
+				AgendaIO.exportarPersonales(agenda, "personales-relacion.txt");
+			} catch (IOException e) {
+				System.out.println("Error al exportarPersonales");
+			}
+		
 
+}
 }
