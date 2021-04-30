@@ -34,15 +34,15 @@ public class AgendaIO {
 	    while (sc.hasNextLine()) {
 		try {
 		    String linea = sc.nextLine();
-		    parsearLinea(linea);
+		    agenda.añadirContacto(parsearLinea(linea));
 		} catch (DateTimeParseException e) {
-		    System.out.println("Error al parsear una fecha: " + e.getMessage());
+
 		    lineas_erroneas++;
 		} catch (NumberFormatException e) {
-		    System.out.println("Error al parsear un número: " + e.getMessage());
+
 		    lineas_erroneas++;
 		} catch (IllegalArgumentException e) {
-		    System.out.println("Error al cargar la línea: " + e.getMessage());
+
 		    lineas_erroneas++;
 		}
 	    }
