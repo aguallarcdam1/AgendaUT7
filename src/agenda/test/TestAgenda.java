@@ -3,13 +3,11 @@ package agenda.test;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
 
 import agenda.io.AgendaIO;
 import agenda.modelo.AgendaContactos;
 import agenda.modelo.Contacto;
 import agenda.modelo.Personal;
-import agenda.modelo.Relacion;
 
 public class TestAgenda {
 
@@ -35,10 +33,8 @@ public class TestAgenda {
 	personalesOrdenadosPorFecha(agenda, 'w');
 	separador();
 
-	personalesPorRelacion(agenda);
-	separador();
-	
 	exportarPersonales(agenda);
+	separador();
 
     }
 
@@ -76,23 +72,19 @@ public class TestAgenda {
 
     }
 
-    private static void personalesPorRelacion(AgendaContactos agenda) {
-	Map<Relacion, List<String>> map = agenda.personalesPorRelacion();
-	map.forEach((key, value) -> System.out.println(key + "\n\t" + value));
-    }
-
     private static void separador() {
 	System.out.println("------------------------------------------------------------");
 
     }
-    private static void exportarPersonales(AgendaContactos agenda) {
-		
-			try {
-				AgendaIO.exportarPersonales(agenda, "personales-relacion.txt");
-			} catch (IOException e) {
-				System.out.println("Error al exportarPersonales");
-			}
-		
 
-}
+    private static void exportarPersonales(AgendaContactos agenda) {
+
+	try {
+	    AgendaIO.exportarPersonales(agenda, "personales-relacion.txt");
+	    System.out.println("Exportados personales ordenados por relación");
+	} catch (IOException e) {
+	    System.out.println("Error al exportarPersonales");
+	}
+
+    }
 }

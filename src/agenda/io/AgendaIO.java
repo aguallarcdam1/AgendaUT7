@@ -7,6 +7,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.format.DateTimeParseException;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import agenda.modelo.AgendaContactos;
@@ -79,23 +81,24 @@ public class AgendaIO {
 		    Relacion.valueOf(datos[6].toUpperCase().trim()));
 	}
     }
+
     /**
      * 
-     *  El metodo guarda en el fichero de texto los contactos personales
-		agrupados por relación
+     * El metodo guarda en el fichero de texto los contactos personales agrupados
+     * por relación
+     * 
      * @param agenda
      * @param nombre
      * @throws IOException
      */
     public static void exportarPersonales(AgendaContactos agenda, String nombre) throws IOException {
-    	File f = new File(nombre);
-    	PrintWriter salida = new PrintWriter(new BufferedWriter(new FileWriter(f)));
-    	agenda.personalesPorRelacion();
-		salida.println(agenda.toString());
-		salida.close();
-    	
-    	
-    	
+	File f = new File(nombre);
+	PrintWriter salida = new PrintWriter(new BufferedWriter(new FileWriter(f)));
+
+	Map<Relacion, List<String>> map = agenda.personalesPorRelacion();
+	map.forEach((key, value) -> salida.println(key + "\n\t" + value));
+	salida.close();
+
     }
 
 }
