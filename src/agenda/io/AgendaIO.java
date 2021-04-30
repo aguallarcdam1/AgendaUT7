@@ -1,7 +1,11 @@
 package agenda.io;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
@@ -74,6 +78,17 @@ public class AgendaIO {
 	    return new Personal(datos[1].trim(), datos[2].trim(), datos[3].trim(), datos[4].trim(), datos[5].trim(),
 		    Relacion.valueOf(datos[6].toUpperCase().trim()));
 	}
+    }
+    
+    public static void exportarPersonales(AgendaContactos agenda, String nombre) throws IOException {
+    	File f = new File(nombre);
+    	PrintWriter salida = new PrintWriter(new BufferedWriter(new FileWriter(f)));
+    	agenda.personalesPorRelacion();
+		salida.println(agenda.toString());
+		salida.close();
+    	
+    	
+    	
     }
 
 }
