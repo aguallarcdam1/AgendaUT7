@@ -79,7 +79,14 @@ public class AgendaIO {
 		    Relacion.valueOf(datos[6].toUpperCase().trim()));
 	}
     }
-    
+    /**
+     * 
+     *  El metodo guarda en el fichero de texto los contactos personales
+		agrupados por relación
+     * @param agenda
+     * @param nombre
+     * @throws IOException
+     */
     public static void exportarPersonales(AgendaContactos agenda, String nombre) throws IOException {
     	File f = new File(nombre);
     	PrintWriter salida = new PrintWriter(new BufferedWriter(new FileWriter(f)));
