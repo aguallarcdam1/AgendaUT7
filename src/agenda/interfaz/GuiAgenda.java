@@ -1,9 +1,13 @@
 package agenda.interfaz;
 
+import java.io.File;
+
+import agenda.io.AgendaIO;
 import agenda.modelo.AgendaContactos;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuBar;
@@ -13,7 +17,10 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 
 public class GuiAgenda extends Application {
@@ -50,8 +57,7 @@ public class GuiAgenda extends Application {
 		Scene scene = new Scene(root, 1100, 700);
 		stage.setScene(scene);
 		stage.setTitle("Agenda de contactos");
-		scene.getStylesheets().add(getClass().getResource("/application.css")
-		                    .toExternalForm());
+		scene.getStylesheets().add(getClass().getResource("/application.css").toExternalForm());
 		stage.show();
 
 	}
@@ -83,10 +89,39 @@ public class GuiAgenda extends Application {
 		return panel;
 	}
 
+	/**
+	 * Crea un contenedor GridPane que contendra los 27 botones de letras
+	 * 
+	 * @return GridPane
+	 */
 	private GridPane crearPanelLetras() {
-		// a completar
-		GridPane panel = new GridPane();
 
+		GridPane panel = new GridPane();
+		panel.setPadding(new Insets(10));
+		panel.setVgap(5);
+		panel.setHgap(5);
+		panel.setAlignment(Pos.CENTER);
+
+		String letras = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
+
+		int pos = 0;
+
+		for (int row = 0; row < 2; row++) {
+			for (int col = 0; col < 15 && pos < letras.length(); col++) {
+
+				String nombreBtn = String.valueOf(letras.charAt(pos));
+
+				Button btn = new Button(nombreBtn);
+				btn.getStyleClass().add("botonletra");
+				btn.setMaxSize(Integer.MAX_VALUE, Integer.MAX_VALUE);
+				GridPane.setHgrow(btn, Priority.ALWAYS);
+				GridPane.setVgrow(btn, Priority.ALWAYS);
+				btn.setOnAction(event -> contactosEnLetra(btn.getText().charAt(0)));
+
+				panel.add(btn, col, row);
+				pos++;
+			}
+		}
 		return panel;
 	}
 
@@ -97,8 +132,21 @@ public class GuiAgenda extends Application {
 		return barra;
 	}
 
+	/**
+	 * Se abre un cuadro de diálogo que permite seleccionar el fichero agenda.csv.
+	 * Se importan los datos de la agenda y se muestran en el area de texto.
+	 */
 	private void importarAgenda() {
-		// a completar
+		FileChooser selector = new FileChooser();
+		selector.setTitle("Abrir fichero de datos");
+		selector.getExtensionFilters().addAll(new ExtensionFilter("csv"));
+		File f = selector.showOpenDialog(null);
+
+		itemImportar.setDisable(true);
+		itemExportarPersonales.setDisable(false);
+
+		int numeroErrores = AgendaIO.importar(agenda, f.getName());
+		areaTexto.setText("Importada agenda\n\nNúmero de errores: " + numeroErrores);
 
 	}
 
