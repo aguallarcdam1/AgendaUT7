@@ -12,7 +12,9 @@ import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -344,8 +346,19 @@ public class GuiAgenda extends Application {
 
 	}
 
+	/**
+	 * Devuelve una ventada que da información sobre el proyecto.
+	 */
 	private void about() {
-		// a completar
+		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+
+		DialogPane dialogPane = alert.getDialogPane();
+		dialogPane.getStylesheets().add(getClass().getResource("/application.css").toExternalForm());
+
+		alert.setTitle("About Agenda de Contactos");
+		alert.setHeaderText(null);
+		alert.setContentText("Mi agenda de\ncontactos");
+		alert.showAndWait();
 
 	}
 
