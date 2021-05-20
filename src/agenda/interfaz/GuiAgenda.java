@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import agenda.io.AgendaIO;
 import agenda.modelo.AgendaContactos;
@@ -298,8 +299,8 @@ public class GuiAgenda extends Application {
 	}
 
 	/**
-	 * Mostrará los contactos personales cuyo apellido comienzen por la letra que el
-	 * usuario elija.
+	 * Mostrará un panel con letras a elegir, luego mostrará los contactos
+	 * personales cuyo apellido comienze por la letra que el usuario elija.
 	 */
 	private void contactosPersonalesEnLetra() {
 		clear();
@@ -341,9 +342,33 @@ public class GuiAgenda extends Application {
 
 	}
 
+	/**
+	 * Dependiendo el botón de letra que el usuario, se mostrará todos los contactos
+	 * cuyo apellido comienze por la letra del botón.
+	 * 
+	 * @param letra
+	 */
 	private void contactosEnLetra(char letra) {
 		clear();
-		// a completar
+
+		if (agenda.totalContactos() == 0) {
+
+			areaTexto.setText("Importa primero la agenda");
+
+		} else {
+			Set<Contacto> contactos = agenda.contactosEnLetra(letra);
+
+			areaTexto.setText("Contactos personales en la letra: " + letra + "\n");
+
+			if (contactos == null) {
+				areaTexto.appendText("\nNo hay contactos");
+			} else {
+				for (Contacto contacto : contactos) {
+					areaTexto.appendText("\n" + contacto.toString());
+
+				}
+			}
+		}
 	}
 
 	private void felicitar() {
