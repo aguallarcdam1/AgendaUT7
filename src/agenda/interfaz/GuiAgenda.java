@@ -17,6 +17,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -85,10 +86,64 @@ public class GuiAgenda extends Application {
 		return panel;
 	}
 
+	/**
+	 * Crea el panel vertical con distintos botones que realizan diferentes
+	 * acciones.
+	 * 
+	 * @return VBox
+	 */
 	private VBox crearPanelBotones() {
 		// a completar
 		VBox panel = new VBox();
+		panel.setPadding(new Insets(10));
+		panel.setSpacing(10);
 
+		txtBuscar = new TextField();
+		txtBuscar.setPromptText("Buscar");
+		txtBuscar.setMinHeight(40);
+		VBox.setVgrow(txtBuscar, Priority.ALWAYS);
+		VBox.setMargin(txtBuscar, new Insets(0, 0, 40, 0));
+		txtBuscar.setOnAction(event -> buscar());
+
+		ToggleGroup grupo = new ToggleGroup();
+		rbtListarTodo = new RadioButton();
+		rbtListarTodo.setText("Listar toda la agenda");
+		rbtListarTodo.setSelected(true);
+		rbtListarTodo.setToggleGroup(grupo);
+
+		rbtListarSoloNumero = new RadioButton();
+		rbtListarSoloNumero.setText("Listar nº de contactos");
+		rbtListarSoloNumero.setToggleGroup(grupo);
+
+		btnListar = new Button("Listar");
+		btnListar.setPrefWidth(250);
+		btnListar.getStyleClass().add("botones");
+		VBox.setMargin(btnListar, new Insets(0, 0, 40, 0));
+		btnListar.setOnAction(event -> listar());
+
+		btnPersonalesEnLetra = new Button("Contactos personales en letra");
+		btnPersonalesEnLetra.setPrefWidth(250);
+		btnPersonalesEnLetra.getStyleClass().add("botones");
+		btnPersonalesEnLetra.setOnAction(event -> contactosPersonalesEnLetra());
+
+		btnPersonalesOrdenadosPorFecha = new Button("Contactos personales\nordenados por fecha");
+		btnPersonalesOrdenadosPorFecha.setPrefWidth(250);
+		btnPersonalesOrdenadosPorFecha.getStyleClass().add("botones");
+		btnPersonalesOrdenadosPorFecha.setOnAction(event -> personalesOrdenadosPorFecha());
+
+		btnClear = new Button("Clear");
+		btnClear.setPrefWidth(250);
+		btnClear.getStyleClass().add("botones");
+		VBox.setMargin(btnClear, new Insets(40, 0, 0, 0));
+		btnClear.setOnAction(event -> clear());
+
+		btnSalir = new Button("Salir");
+		btnSalir.setPrefWidth(250);
+		btnSalir.getStyleClass().add("botones");
+		btnSalir.setOnAction(event -> salir());
+
+		panel.getChildren().addAll(txtBuscar, rbtListarTodo, rbtListarSoloNumero, btnListar, btnPersonalesEnLetra,
+				btnPersonalesOrdenadosPorFecha, btnClear, btnSalir);
 		return panel;
 	}
 
