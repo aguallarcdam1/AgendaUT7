@@ -2,11 +2,14 @@ package agenda.interfaz;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import agenda.io.AgendaIO;
 import agenda.modelo.AgendaContactos;
 import agenda.modelo.Contacto;
+import agenda.modelo.Personal;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -14,6 +17,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -293,9 +297,47 @@ public class GuiAgenda extends Application {
 
 	}
 
+	/**
+	 * Mostrará los contactos personales cuyo apellido comienzen por la letra que el
+	 * usuario elija.
+	 */
 	private void contactosPersonalesEnLetra() {
 		clear();
-		// a completar
+
+		if (agenda.totalContactos() == 0) {
+
+			areaTexto.setText("Importa primero la agenda");
+
+		} else {
+
+			List<String> opciones = Arrays.asList("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N",
+					"Ñ", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z");
+
+			ChoiceDialog<String> dialogo = new ChoiceDialog<>("A", opciones);
+			dialogo.setTitle("Selector de letra");
+			dialogo.setHeaderText(null);
+			dialogo.setContentText("Elija letra:");
+
+			Optional<String> resul = dialogo.showAndWait();
+			if (resul.isPresent()) {
+
+				String letra = resul.get();
+				List<Personal> personales = agenda.personalesEnLetra(letra.charAt(0));
+
+				if (personales == null) {
+
+					areaTexto.setText("No se han encontrado contactos personales en la letra: " + letra);
+
+				} else {
+					areaTexto.setText(
+							"Contactos personales en la letra: " + letra + " (" + personales.size() + " contacto/s)\n");
+					for (Personal personal : personales) {
+						areaTexto.appendText("\n" + personal.toString());
+					}
+
+				}
+			}
+		}
 
 	}
 
