@@ -10,11 +10,14 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
@@ -125,10 +128,51 @@ public class GuiAgenda extends Application {
 		return panel;
 	}
 
+	/**
+	 * Crea una barra de menú con diferentes opciones que realizarán distintas
+	 * acciones.
+	 * 
+	 * @return MenuBar
+	 */
 	private MenuBar crearBarraMenu() {
-		// a completar
+
 		MenuBar barra = new MenuBar();
 
+		Menu menu1 = new Menu("Archivo");
+		itemImportar = new MenuItem("_Importar agenda");
+		itemImportar.setAccelerator(KeyCombination.keyCombination("Ctrl+I"));
+		itemImportar.setOnAction(event -> importarAgenda());
+
+		itemExportarPersonales = new MenuItem("_Exportar Personales");
+		itemExportarPersonales.setAccelerator(KeyCombination.keyCombination("Ctrl+E"));
+		itemExportarPersonales.setOnAction(event -> exportarPersonales());
+		itemExportarPersonales.setDisable(true);
+
+		itemSalir = new MenuItem("_Salir");
+		itemSalir.setAccelerator(KeyCombination.keyCombination("Ctrl+S"));
+		itemSalir.setOnAction(event -> salir());
+
+		menu1.getItems().addAll(itemImportar, itemExportarPersonales, new SeparatorMenuItem(), itemSalir);
+
+		Menu menu2 = new Menu("Operaciones");
+		itemBuscar = new MenuItem("_Buscar");
+		itemBuscar.setAccelerator(KeyCombination.keyCombination("Ctrl+B"));
+		itemBuscar.setOnAction(event -> buscar());
+
+		itemFelicitar = new MenuItem("_Felicitar");
+		itemFelicitar.setAccelerator(KeyCombination.keyCombination("Ctrl+F"));
+		itemFelicitar.setOnAction(event -> felicitar());
+
+		menu2.getItems().addAll(itemBuscar, itemFelicitar);
+
+		Menu menu3 = new Menu("Help");
+		itemAbout = new MenuItem("_About");
+		itemAbout.setAccelerator(KeyCombination.keyCombination("Ctrl+A"));
+		itemAbout.setOnAction(event -> about());
+
+		menu3.getItems().addAll(itemAbout);
+
+		barra.getMenus().addAll(menu1, menu2, menu3);
 		return barra;
 	}
 
@@ -139,7 +183,7 @@ public class GuiAgenda extends Application {
 	private void importarAgenda() {
 		FileChooser selector = new FileChooser();
 		selector.setTitle("Abrir fichero de datos");
-		selector.getExtensionFilters().addAll(new ExtensionFilter("csv"));
+		selector.getExtensionFilters().addAll(new ExtensionFilter("csv", "*.csv"));
 		File f = selector.showOpenDialog(null);
 
 		itemImportar.setDisable(true);
