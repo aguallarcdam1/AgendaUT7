@@ -2,9 +2,11 @@ package agenda.interfaz;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import agenda.io.AgendaIO;
 import agenda.modelo.AgendaContactos;
+import agenda.modelo.Contacto;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -306,9 +308,37 @@ public class GuiAgenda extends Application {
 
 	}
 
+	/**
+	 * Muestra en el área de texto los contactos de la agenda que contienen el texto
+	 * tecleado.
+	 */
 	private void buscar() {
 		clear();
-		// a completar
+
+		String texto = txtBuscar.getText();
+
+		if (agenda.totalContactos() == 0) {
+
+			areaTexto.setText("Importa primero la agenda");
+
+		} else if (txtBuscar.getText().isEmpty()) {
+
+			areaTexto.setText("No se ha introducido un texto para buscar");
+
+		} else if (agenda.buscarContactos(texto).isEmpty()) {
+
+			areaTexto.setText("No se han encontrado contactos con el texto: " + texto);
+
+		} else {
+			List<Contacto> contactos = agenda.buscarContactos(texto);
+
+			areaTexto.setText("Contactos en la agenda que contienen: " + texto + "\n");
+
+			for (Contacto contacto : contactos) {
+				areaTexto.appendText("\n" + contacto.toString());
+			}
+
+		}
 
 		cogerFoco();
 
