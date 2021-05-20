@@ -1,6 +1,7 @@
 package agenda.interfaz;
 
 import java.io.File;
+import java.io.IOException;
 
 import agenda.io.AgendaIO;
 import agenda.modelo.AgendaContactos;
@@ -165,7 +166,7 @@ public class GuiAgenda extends Application {
 		int pos = 0;
 
 		for (int row = 0; row < 2; row++) {
-			for (int col = 0; col < 15 && pos < letras.length(); col++) {
+			for (int col = 0; col < 14 && pos < letras.length(); col++) {
 
 				String nombreBtn = String.valueOf(letras.charAt(pos));
 
@@ -244,13 +245,32 @@ public class GuiAgenda extends Application {
 		itemImportar.setDisable(true);
 		itemExportarPersonales.setDisable(false);
 
-		int numeroErrores = AgendaIO.importar(agenda, f.getName());
-		areaTexto.setText("Importada agenda\n\nNúmero de errores: " + numeroErrores);
+		if (f != null) {
+			int numeroErrores = AgendaIO.importar(agenda, f.getName());
+			areaTexto.setText("Importada agenda\n\nNúmero de errores: " + numeroErrores);
+		} else {
+			areaTexto.setText("Agenda no importada");
+		}
 
 	}
 
+	/**
+	 * Se abre un cuadro de diálogo que permite guardar los datos personales en el
+	 * fichero seleccionado.
+	 */
 	private void exportarPersonales() {
-		// a completar
+		FileChooser selector = new FileChooser();
+		selector.setTitle("Guardar fichero de datos");
+		selector.getExtensionFilters().addAll(new ExtensionFilter("txt", "*.txt"));
+		File f = selector.showSaveDialog(null);
+
+		try {
+			AgendaIO.exportarPersonales(agenda, f.getName());
+			areaTexto.setText("Exportados datos personales");
+
+		} catch (IOException e) {
+			areaTexto.setText("Error al exportar fichero" + e.getMessage());
+		}
 
 	}
 
