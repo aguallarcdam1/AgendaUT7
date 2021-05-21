@@ -2,6 +2,7 @@ package agenda.interfaz;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -251,12 +252,11 @@ public class GuiAgenda extends Application {
 		selector.getExtensionFilters().addAll(new ExtensionFilter("csv", "*.csv"));
 		File f = selector.showOpenDialog(null);
 
-		itemImportar.setDisable(true);
-		itemExportarPersonales.setDisable(false);
-
 		if (f != null) {
 			int numeroErrores = AgendaIO.importar(agenda, f.getName());
 			areaTexto.setText("Importada agenda\n\nNúmero de errores: " + numeroErrores);
+			itemImportar.setDisable(true);
+			itemExportarPersonales.setDisable(false);
 		} else {
 			areaTexto.setText("Agenda no importada");
 		}
@@ -284,17 +284,62 @@ public class GuiAgenda extends Application {
 	}
 
 	/**
-	 *  
+	 * Mostrará todos los contactos de la lista.
 	 */
 	private void listar() {
 		clear();
-		// a completar
 
+		if (agenda.totalContactos() == 0) {
+
+			areaTexto.setText("Importa primero la agenda");
+
+		} else if (rbtListarTodo.isSelected()) {
+			areaTexto.setText(agenda.toString());
+		} else {
+			areaTexto.setText("Total contactos en la agenda: " + agenda.totalContactos());
+		}
 	}
 
+	/**
+	 * Muestra los contactos personales de la letra seleccionada pero ordenados de
+	 * fecha de nacimiento mas antigua a la más reciente
+	 */
 	private void personalesOrdenadosPorFecha() {
 		clear();
-		// a completar
+		if (agenda.totalContactos() == 0) {
+
+			areaTexto.setText("Importa primero la agenda");
+
+		} else {
+
+			List<String> opciones = Arrays.asList("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N",
+					"Ñ", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z");
+
+			ChoiceDialog<String> dialogo = new ChoiceDialog<>("A", opciones);
+			dialogo.setTitle("Selector de letra");
+			dialogo.setHeaderText(null);
+			dialogo.setContentText("Elija letra:");
+
+			Optional<String> resul = dialogo.showAndWait();
+			if (resul.isPresent()) {
+
+				String letra = resul.get();
+				List<Personal> personales = agenda.personalesOrdenadosPorFechaNacimiento(letra.charAt(0));
+
+				if (personales == null) {
+
+					areaTexto.setText("No se han encontrado contactos personales en la letra: " + letra);
+
+				} else {
+					areaTexto.setText(
+							"Contactos personales ordenados por fecha de nacimiento en la letra:\n" + letra + "\n");
+					for (Personal personal : personales) {
+						areaTexto.appendText("\n" + personal.toString());
+					}
+
+				}
+			}
+		}
 
 	}
 
@@ -323,7 +368,7 @@ public class GuiAgenda extends Application {
 			if (resul.isPresent()) {
 
 				String letra = resul.get();
-				List<Personal> personales = agenda.personalesEnLetra(letra.charAt(0));
+				List<Personal> personales = agenda.personalesOrdenadosPorFechaNacimiento(letra.charAt(0));
 
 				if (personales == null) {
 
@@ -331,7 +376,7 @@ public class GuiAgenda extends Application {
 
 				} else {
 					areaTexto.setText(
-							"Contactos personales en la letra: " + letra + " (" + personales.size() + " contacto/s)\n");
+							"Contactos personales ordenados por fecha de nacimiento en la letra:\n " + letra + "\n");
 					for (Personal personal : personales) {
 						areaTexto.appendText("\n" + personal.toString());
 					}
@@ -371,9 +416,24 @@ public class GuiAgenda extends Application {
 		}
 	}
 
+	/**
+	 * Muestra los contactos personales que cumplen años el día de ejecución del
+	 * programa.
+	 */
 	private void felicitar() {
 		clear();
-		// a completar
+
+		if (agenda.totalContactos() == 0) {
+
+			areaTexto.setText("Importa primero la agenda\n");
+
+		} else {
+			areaTexto.setText("Hoy es " + LocalDate.now());
+			List<Personal> personales = agenda.felicitar();
+			for (Personal personal : personales) {
+				areaTexto.appendText("\n" + personal.toString());
+			}
+		}
 
 	}
 
