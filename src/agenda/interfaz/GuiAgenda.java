@@ -38,6 +38,12 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 
+/**
+ * Interfaz gráfica de la agenda de contactos
+ * 
+ * @author Javier & Andrés
+ *
+ */
 public class GuiAgenda extends Application {
 	private AgendaContactos agenda;
 	private MenuItem itemImportar;
@@ -368,15 +374,14 @@ public class GuiAgenda extends Application {
 			if (resul.isPresent()) {
 
 				String letra = resul.get();
-				List<Personal> personales = agenda.personalesOrdenadosPorFechaNacimiento(letra.charAt(0));
+				List<Personal> personales = agenda.personalesEnLetra(letra.charAt(0));
 
 				if (personales == null) {
 
 					areaTexto.setText("No se han encontrado contactos personales en la letra: " + letra);
 
 				} else {
-					areaTexto.setText(
-							"Contactos personales ordenados por fecha de nacimiento en la letra:\n " + letra + "\n");
+					areaTexto.setText("Contactos personales en la letra:\n " + letra + "\n");
 					for (Personal personal : personales) {
 						areaTexto.appendText("\n" + personal.toString());
 					}
@@ -452,6 +457,7 @@ public class GuiAgenda extends Application {
 
 		} else if (txtBuscar.getText().isEmpty()) {
 
+			txtBuscar.setText("Teclee texto");
 			areaTexto.setText("No se ha introducido un texto para buscar");
 
 		} else if (agenda.buscarContactos(texto).isEmpty()) {
